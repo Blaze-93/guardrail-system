@@ -44,18 +44,15 @@ The system uses a multi-layered logic approach to ensure high precision:
   "confidence": "float (0-1)"
 }
 ```
----
-## 🚀 Installation & Integration
+## 🚀 Installation & Setup
 
-### Setup
-
-1. **Install dependencies:**
+1. **Install Dependencies:**
    ```bash
-   pip install fastapi uvicorn sentence-transformers torch
+   pip install fastapi uvicorn sentence-transformers torch pydantic
 
 2. **Run the service:**
    ```bash
-   uvicorn main:app --reload
+   uvicorn Guardrail.main:app --reload
 
 ### Pipeline Behavior
 This guardrail is integrated **before** deep evaluation. 
