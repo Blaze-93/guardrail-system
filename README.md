@@ -44,11 +44,13 @@ The system uses a multi-layered logic approach to ensure high precision:
   "confidence": "float (0-1)"
 }
 ```
+---
 ## 🚀 Installation & Setup
 
 1. **Install Dependencies:**
+   Using the provided requirements file ensures all AI models and server components are version-synced:
    ```bash
-   pip install fastapi uvicorn sentence-transformers torch pydantic
+   pip install -r requirements.txt
 
 2. **Run the service:**
    ```bash
