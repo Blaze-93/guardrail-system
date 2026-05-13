@@ -1,6 +1,6 @@
 # 🛡️ Guardrail: Invalid & Irrelevant Answer Detection System
 
-This repository contains **Task 19** (Phase 2 Guardrails) for the AI Interview Assessment System. It acts as a gatekeeper to ensure only high-quality, relevant responses are passed to the evaluation engine.
+This repository contains  Guardrails for the AI Interview Assessment System. It acts as a gatekeeper to ensure only high-quality, relevant responses are passed to the evaluation engine.
 
 ---
 
@@ -35,3 +35,39 @@ The system uses a multi-layered logic approach to ensure high precision:
   "question": "string",
   "answer": "string"
 }
+```
+### Output Schema
+```json
+{
+  "valid": "boolean",
+  "issue_type": "irrelevant | generic | empty | nonsense | null",
+  "confidence": "float (0-1)"
+}
+```
+---
+## 🚀 Installation & Integration
+
+### Setup
+
+1. **Install dependencies:**
+   ```bash
+   pip install fastapi uvicorn sentence-transformers torch
+
+2. **Run the service:**
+   ```bash
+   uvicorn main:app --reload
+
+### Pipeline Behavior
+This guardrail is integrated **before** deep evaluation. 
+- **If `valid: false`:** The system overrides the evaluation score to **0**.
+- **Confidence Scores:** Used by the decision engine to determine flag strength.
+
+---
+
+## ✅ Deliverables Summary
+- **Detection Logic:** Multi-layered approach combining heuristic filters with AI-driven semantic validation.
+- **Rule Definitions:** Transparent logic thresholds defined for Empty, Nonsense, Generic, and Irrelevant categories.
+- **High Precision:** Calibration optimized to handle short but correct responses while flagging verbose irrelevance.
+- **Integration Ready:** Fully compatible with the existing evaluation pipeline for automated scoring overrides.
+
+
