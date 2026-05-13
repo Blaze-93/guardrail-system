@@ -1,23 +1,33 @@
-# Task 19: Invalid / Irrelevant Answer Detection System (Guardrails Phase 2)
+# 🛡️ Guardrail: Invalid & Irrelevant Answer Detection System
 
-## 📌 Project Overview
-This module is a core component of the **AI Interview Assessment System** Guardrails. It acts as a gatekeeper to detect and flag answers that are irrelevant, generic, nonsensical, or empty before they are processed by the evaluation engine.
+This repository contains **Task 19** (Phase 2 Guardrails) for the AI Interview Assessment System. It acts as a gatekeeper to ensure only high-quality, relevant responses are passed to the evaluation engine.
 
-### Objectives:
-- **Filter Noise:** Prevent garbage data from reaching the scoring logic.
-- **Cost Efficiency:** Bypass expensive LLM evaluations for invalid responses.
-- **Enhanced Feedback:** Provide specific signals to the decision engine for follow-up triggers.
+---
 
-## 🛠️ Technical Architecture
-The system is built using **FastAPI** for high-performance serving and **PyTorch/Sentence-Transformers** for deep semantic analysis.
+## 🎯 Objective
+To detect and flag invalid responses to optimize the evaluation pipeline and provide signals to the decision engine for corrective follow-ups.
 
-### Detection Strategies:
-1. **Length Heuristics:** Identifies empty strings or answers under the minimum character threshold.
-2. **Nonsense Detection:** A unique character variety check to catch "keyboard smashing" (e.g., *asdfghjkl*).
-3. **Pattern Matching:** Regex-based filtering for "memorized" or "evasive" responses (e.g., *"I don't know"*, *"Not sure"*).
-4. **Semantic Similarity:** Uses the `all-MiniLM-L6-v2` transformer model to compare the mathematical vector of the question against the answer.
+### Target Detection Categories:
+- **Irrelevant:** Answers that do not align with the question's topic.
+- **Generic:** Memorized or evasive answers (e.g., "I don't know").
+- **Nonsense:** Keyboard smashing or gibberish.
+- **Empty:** Null or extremely short inputs.
 
-## ⚙️ API Specification
+---
+
+## 🛠️ Detection Strategies
+The system uses a multi-layered logic approach to ensure high precision:
+
+| Strategy | Implementation | Purpose |
+| :--- | :--- | :--- |
+| **Semantic Similarity** | `Sentence-Transformers` | Measures vector distance between Question and Answer. |
+| **Pattern Detection** | Regex & Phrase Mapping | Identifies "I don't know" and other evasive templates. |
+| **Length Heuristics** | Character/Word Count | Flags empty or too-short responses. |
+| **Entropy Check** | Unique Character Variety | Detects gibberish/nonsense (e.g., "asdfasdf"). |
+
+---
+
+## ⚙️ Technical Specifications
 
 ### Input Schema
 ```json
